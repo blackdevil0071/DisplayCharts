@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart Selector</title>
+    <link rel="stylesheet" href="static/styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="menu-bar">
+        <a href="/">Home</a>
+        <a href="chart.html">Chart</a>
+    </div>
+    <div class="container">
+        <button id="chooseChartBtn">Click to Choose</button>
+    </div>
+    <div id="chartModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Select Chart Type</h2>
+            <select id="chartType">
+                <option value="" disabled selected>Select chart type</option>
+                <option value="bar">Bar Chart</option>
+                <option value="line">Line Chart</option>
+            </select>
+            <button id="submitChartType">Submit</button>
+        </div>
+    </div>
+    <script src="static/scripts.js"></script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+html{
+  font-family:Georgia, 'Times New Roman', Times, serif ;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  
+background-color: #080000;  /* Dark background for the whole page */
+color: #444141; 
+}
+
+
+.menu-bar {
+  background-color: #080000;
+  overflow: hidden;
+  border-bottom: 1px solid rgb(83, 83, 83);
+}
+
+.menu-bar a {
+  float: left;
+  display: block;
+  color: rgb(161, 158, 158);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.menu-bar a:hover {
+  background-color: #ddd;
+  color: rgba(17, 3, 3, 0.897);
+}
+
+.container {
+  display: flex;
+  padding-top: 30px;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 60px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(53, 51, 51, 0.4);
+  transition: 5ms;
+}
+
+.modal-content {
+  background-color: #0c0101;
+  margin: 5% auto;
+  padding: 20px;
+  border: none;
+  width: 80%;
+  color: #f1f1f1;
+  box-shadow: 0 5px 15px rgba(15, 1, 1, 0.4);
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+button {
+  color: black;
+  background-color: rgb(177, 173, 173);
+  border: none;
+  border-radius: 2px;
+  width: 15em; 
+  height: 40px;
+  padding: 10px;
+  align-items: center;
+  cursor: pointer;
+}
+button:hover{
+  background-color: white;
+}
+
+select {
+  width: auto; /* Adjust width as needed */
+  max-width: 300px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #444;
+  font-size: 16px;
+  color: #f1f1f1;
+  display: inline-flex;
+  align-items: center; /* Align vertically with the button */
+}
+
+select:hover {
+  border-color: #888;
+}
+
+select:focus {
+  outline: none;
+  border-color: #555;
+}
+
+option {
+  padding: 10px;
+  background-color: #333;
+  color: #f1f1f1;
+}
