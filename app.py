@@ -3,10 +3,9 @@ from urllib.parse import urlparse, parse_qs
 import json
 import os
 
-# Simple in-memory storage for chart type
+
 chart_type = None
 
-# Sample chart data
 chart_data = {
     "labels": [
         "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006",

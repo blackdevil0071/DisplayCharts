@@ -1,20 +1,23 @@
-html{
-  font-family:Georgia, 'Times New Roman', Times, serif ;
+html {
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 body {
   margin: 0;
   padding: 0;
-  
-background-color: #080000;  /* Dark background for the whole page */
-color: #444141; 
+  background-color: #080000; /* Dark background for the whole page */
+  color: #444141;
 }
 
-
 .menu-bar {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  height: 60px;
   background-color: #080000;
   overflow: hidden;
   border-bottom: 1px solid rgb(83, 83, 83);
+  z-index: 1000; /* Ensure menu bar is on top */
 }
 
 .menu-bar a {
@@ -22,44 +25,59 @@ color: #444141;
   display: block;
   color: rgb(161, 158, 158);
   text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
+  padding: 20px 20px;
+  font-size: large;
+  text-decoration: solid;
+  transition: transform 0.3s ease, color 0.3s ease; /* Add transition for smooth effect */
 }
 
 .menu-bar a:hover {
-  background-color: #ddd;
-  color: rgba(17, 3, 3, 0.897);
+  color: white;
+  transform: scale(1.1); /* Zoom effect on hover */
 }
 
 .container {
   display: flex;
-  padding-top: 30px;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  height: calc(100vh - 60px); /* Adjust height based on the menu bar height */
+  margin-top: 60px; /* Space for the fixed menu bar */
+  overflow: auto; /* Enable scrolling within the container */
+}
+
+canvas {
+  width: 100% !important;
+  height: 100% !important;
 }
 
 .modal {
   display: none;
   position: fixed;
-  z-index: 1;
-  padding-top: 60px;
+  z-index: 1001;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(53, 51, 51, 0.4);
-  transition: 5ms;
+  background-color: rgba(70, 67, 67, 0.5);
+  justify-content: center;
+  align-items: center;
 }
 
 .modal-content {
   background-color: #0c0101;
-  margin: 5% auto;
+  margin: auto;
   padding: 20px;
   border: none;
-  width: 80%;
+  max-width: 600px;
+  width: 40%; /* Smaller width for the modal content */
   color: #f1f1f1;
   box-shadow: 0 5px 15px rgba(15, 1, 1, 0.4);
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  ;
 }
 
 .close {
@@ -78,21 +96,23 @@ color: #444141;
 
 button {
   color: black;
-  background-color: rgb(177, 173, 173);
+  background-color: rgb(161, 158, 158);
   border: none;
   border-radius: 2px;
-  width: 15em; 
-  height: 40px;
-  padding: 10px;
+  width: 15em;
+  height: 39px;
+  padding: 5px;
   align-items: center;
   cursor: pointer;
+  margin-left: 0;
 }
-button:hover{
+
+button:hover {
   background-color: white;
 }
 
 select {
-  width: auto; /* Adjust width as needed */
+  width: 100%; /* Make the select element full width */
   max-width: 300px;
   padding: 10px;
   border: 1px solid #ccc;
@@ -101,7 +121,7 @@ select {
   font-size: 16px;
   color: #f1f1f1;
   display: inline-flex;
-  align-items: center; /* Align vertically with the button */
+  align-items: center;
 }
 
 select:hover {
@@ -116,5 +136,5 @@ select:focus {
 option {
   padding: 10px;
   background-color: #333;
-  color: #f1f1f1;
+  color: #cec7c7e3;
 }
