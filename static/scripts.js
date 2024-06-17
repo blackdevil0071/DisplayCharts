@@ -64,7 +64,7 @@ $(document).ready(function () {
                   ticks: {
                     color: "rgb(161, 158, 158)",
                     font: {
-                      size: window.innerWidth < 600 ? 10 : 12, // Adjust font size based on screen width
+                      size: window.innerWidth < 600 ? 10 : 12, 
                     },
                   },
                 },
@@ -72,19 +72,19 @@ $(document).ready(function () {
                   ticks: {
                     color: "rgb(161, 158, 158)",
                     font: {
-                      size: window.innerWidth < 600 ? 10 : 12, // Adjust font size based on screen width
+                      size: window.innerWidth < 600 ? 10 : 12, 
                     },
                   },
                 },
               },
               plugins: {
                 tooltip: {
-                  backgroundColor: "rgba(255, 255, 255, 0.9)", // Light color for tooltip background
-                  titleColor: "#333", // Dark color for tooltip title text
-                  bodyColor: "#333", // Dark color for tooltip body text
+                  backgroundColor: "rgba(255, 255, 255, 0.9)", 
+                                    titleColor: "#333",
+                  bodyColor: "#333",
                   callbacks: {
                     label: function (tooltipItem) {
-                      return tooltipItem.label + ': ' + tooltipItem.formattedValue; // Custom label format
+                      return tooltipItem.label + ': ' + tooltipItem.formattedValue; 
                     },
                   },
                 },
@@ -92,7 +92,7 @@ $(document).ready(function () {
                   labels: {
                     color: "rgb(161, 158, 158)",
                     font: {
-                      size: window.innerWidth < 600 ? 10 : 12, // Adjust font size based on screen width
+                      size: window.innerWidth < 600 ? 10 : 12, 
                     },
                   },
                 },
