@@ -143,3 +143,13 @@ option {
     width: 10em; /* Adjust button size for smaller screens */
   }
 }
+
+#errorMsgContainer {
+  font-size: larger;
+  display: flex;
+  justify-content: center;
+  color: white;
+  
+}
+
+

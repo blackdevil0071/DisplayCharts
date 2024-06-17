@@ -34,6 +34,7 @@ class RequestHandler(BaseHTTPRequestHandler):
         self.send_header('Content-type', 'application/json')
         self.end_headers()
         response = json.dumps(chart_data if chart_type in ['bar', 'line'] else {'error': 'Please select chart type from home page'})
+        print(response)
         self.wfile.write(response.encode())
 
     def serve_file(self, filepath, content_type):
