@@ -10,7 +10,6 @@ body {
 }
 
 .menu-bar {
-  position: fixed;
   width: 100%;
   top: 0;
   height: 60px;
@@ -18,32 +17,23 @@ body {
   overflow: hidden;
   border-bottom: 1px solid rgb(83, 83, 83);
   z-index: 1000; /* Ensure menu bar is on top */
+  display: flex;
+  justify-content: center; /* Center the menu items */
 }
 
 .menu-bar a {
-  float: left;
-  display: block;
+  display: inline-block;
   color: rgb(161, 158, 158);
   text-align: center;
-  padding: 20px 20px;
-  font-size: large;
-  text-decoration: solid;
+  padding: 20px;
+  font-size: 1.5rem; /* Use rem for relative sizing */
+  text-decoration: none;
   transition: transform 0.3s ease, color 0.3s ease; /* Add transition for smooth effect */
 }
 
 .menu-bar a:hover {
   color: white;
   transform: scale(1.1); /* Zoom effect on hover */
-}
-
-.container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: calc(100vh - 60px); /* Adjust height based on the menu bar height */
-  margin-top: 60px; /* Space for the fixed menu bar */
-  overflow: auto; /* Enable scrolling within the container */
 }
 
 canvas {
@@ -59,7 +49,6 @@ canvas {
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
   background-color: rgba(70, 67, 67, 0.5);
   justify-content: center;
   align-items: center;
@@ -71,13 +60,12 @@ canvas {
   padding: 20px;
   border: none;
   max-width: 600px;
-  width: 40%; /* Smaller width for the modal content */
+  width: 90%; /* Use percentage for responsiveness */
   color: #f1f1f1;
   box-shadow: 0 5px 15px rgba(15, 1, 1, 0.4);
   position: relative;
   top: 50%;
   transform: translateY(-50%);
-  ;
 }
 
 .close {
@@ -94,6 +82,15 @@ canvas {
   cursor: pointer;
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  height: calc(100vh - 60px); /* Adjust height based on the menu bar height */
+}
+
 button {
   color: black;
   background-color: rgb(161, 158, 158);
@@ -102,9 +99,7 @@ button {
   width: 15em;
   height: 39px;
   padding: 5px;
-  align-items: center;
   cursor: pointer;
-  margin-left: 0;
 }
 
 button:hover {
@@ -120,8 +115,6 @@ select {
   background-color: #444;
   font-size: 16px;
   color: #f1f1f1;
-  display: inline-flex;
-  align-items: center;
 }
 
 select:hover {
@@ -136,5 +129,17 @@ select:focus {
 option {
   padding: 10px;
   background-color: #333;
-  color: #cec7c7e3;
+  color: #cec7c7;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  
+  .modal-content {
+    width: 100%; /* More flexible for small screens */
+  }
+
+  button {
+    width: 10em; /* Adjust button size for smaller screens */
+  }
 }

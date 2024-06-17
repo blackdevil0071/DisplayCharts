@@ -1,8 +1,6 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import urlparse, parse_qs
 import json
-import os
-
 
 chart_type = None
 
@@ -19,80 +17,57 @@ class RequestHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         parsed_path = urlparse(self.path)
-        query_params = parse_qs(parsed_path.query)
 
         if parsed_path.path == '/chart-data':
-            self.send_response(200)
-            self.send_header('Content-type', 'application/json')
-            self.end_headers()
-
-            if chart_type in ['bar', 'line']:
-                response = json.dumps(chart_data)
-            else:
-                response = json.dumps({'error': 'Please select chart type from home page'})
-
-            self.wfile.write(response.encode())
-
+            self.handle_chart_data_request()
         elif parsed_path.path == '/':
-            self.send_response(200)
-            self.send_header('Content-type', 'text/html')
-            self.end_headers()
-            with open('index.html', 'rb') as file:
-                self.wfile.write(file.read())
-
+            self.serve_file('index.html', 'text/html')
         elif parsed_path.path == '/chart.html':
-            self.send_response(200)
-            self.send_header('Content-type', 'text/html')
-            self.end_headers()
-            with open('chart.html', 'rb') as file:
-                self.wfile.write(file.read())
-
+            self.serve_file('chart.html', 'text/html')
         elif parsed_path.path.startswith('/static/'):
-            self.serve_static_file(parsed_path.path)
-
+            self.serve_static_file(parsed_path.path[1:])
         else:
-            self.send_response(404)
-            self.send_header('Content-type', 'text/html')
-            self.end_headers()
-            self.wfile.write(b'404 Not Found')
+            self.send_error(404, 'Not Found')
 
-    def serve_static_file(self, path):
+    def handle_chart_data_request(self):
+        self.send_response(200)
+        self.send_header('Content-type', 'application/json')
+        self.end_headers()
+        response = json.dumps(chart_data if chart_type in ['bar', 'line'] else {'error': 'Please select chart type from home page'})
+        self.wfile.write(response.encode())
+
+    def serve_file(self, filepath, content_type):
         try:
-            with open(path[1:], 'rb') as file:
+            with open(filepath, 'rb') as file:
                 self.send_response(200)
-                if path.endswith('.css'):
-                    self.send_header('Content-type', 'text/css')
-                elif path.endswith('.js'):
-                    self.send_header('Content-type', 'application/javascript')
+                self.send_header('Content-type', content_type)
                 self.end_headers()
                 self.wfile.write(file.read())
         except FileNotFoundError:
-            self.send_response(404)
-            self.send_header('Content-type', 'text/html')
-            self.end_headers()
-            self.wfile.write(b'404 Not Found')
+            self.send_error(404, 'Not Found')
+
+    def serve_static_file(self, filepath):
+        content_type = 'text/css' if filepath.endswith('.css') else 'application/javascript'
+        self.serve_file(filepath, content_type)
 
     def do_POST(self):
         if self.path == '/set-chart-type':
-            content_length = int(self.headers['Content-Length'])
-            post_data = self.rfile.read(content_length)
-            post_params = json.loads(post_data.decode('utf-8'))
-            chart_type_selected = post_params.get('chartType')
-
-            global chart_type
-            chart_type = chart_type_selected
-
-            self.send_response(200)
-            self.send_header('Content-type', 'application/json')
-            self.end_headers()
-
-            response = json.dumps({'success': 'Chart type set successfully'})
-            self.wfile.write(response.encode())
+            self.handle_set_chart_type_request()
         else:
-            self.send_response(404)
-            self.send_header('Content-type', 'text/html')
-            self.end_headers()
-            self.wfile.write(b'404 Not Found')
+            self.send_error(404, 'Not Found')
+
+    def handle_set_chart_type_request(self):
+        content_length = int(self.headers['Content-Length'])
+        post_data = self.rfile.read(content_length)
+        post_params = json.loads(post_data.decode('utf-8'))
+        global chart_type
+        chart_type = post_params.get('chartType')
+
+        self.send_response(200)
+        self.send_header('Content-type', 'application/json')
+        self.end_headers()
+        response = json.dumps({'success': 'Chart type set successfully'})
+        self.wfile.write(response.encode())
 
 def run(server_class=HTTPServer, handler_class=RequestHandler, port=8000):
     server_address = ('', port)
